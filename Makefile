@@ -23,6 +23,7 @@ VPATH := boot:kernel:libs
 $(TARGET)/xv6.img: $(bootblock)
 	dd if=/dev/zero of=$(TARGET)/xv6.img count=10000
 	dd if=$(bootblock) of=$(TARGET)/xv6.img conv=notrunc
+	dd if=libs/kernel of=$(TARGET)/xv6.img seek=1 conv=notrunc
 	
 #creat bootblock
 bootfiles :=bootasm.S bootmain.c
@@ -80,3 +81,15 @@ qemu: $(TARGET)/xv6.img
 qemu-gdb:$(TARGET)/xv6.img
 	@echo "*** Now run 'gdb'." 1>&2
 	$(QEMU) -serial mon:stdio $(QEMUOPTS) -S $(QEMUGDB)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

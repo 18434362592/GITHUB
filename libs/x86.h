@@ -1,11 +1,19 @@
-#include "type.h"
+static inline void
+stosb(void *addr, int data, int cnt)
+{
+  asm volatile("cld; rep stosb" :
+               "=D" (addr), "=c" (cnt) :
+               "0" (addr), "1" (cnt), "a" (data) :
+               "memory", "cc");
+}
+
 
 static inline void insl(ushort port,void *addr,uint count)
 {
 	asm volatile(
 		"cld;rep;insl"
 		:"=D"(addr), "=c"(count)
-		:"d"(port),"1"(count)
+		:"d"(port),"0"(addr),"1"(count)
 		:"cc","memory"
 		);
 }
